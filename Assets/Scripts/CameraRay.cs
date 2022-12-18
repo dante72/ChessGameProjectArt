@@ -31,9 +31,10 @@ public class CameraRay : MonoBehaviour
 
                 current = selectable;
                 selectable.Select();
-            }
 
-            
+                if (Input.GetMouseButtonDown(0))
+                    selectable.Click();
+            }          
         }
     }
 }

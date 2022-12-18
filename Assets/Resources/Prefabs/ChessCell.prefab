@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1324103971359918627}
   - component: {fileID: 1324103971359918631}
   m_Layer: 0
-  m_Name: Cell
+  m_Name: ChessCell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
