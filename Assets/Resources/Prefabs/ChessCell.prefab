@@ -110,4 +110,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 648b9ee8ffb5add4681bd7da0f844e4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  oldColor: {r: 0, g: 0, b: 0, a: 0}
+  selected: {fileID: 2100000, guid: 615ecaaf4230045489e848eeb2c664c1, type: 2}
+  marked: {fileID: 2100000, guid: d27d820beb32a2b4db98055f1188d2c0, type: 2}
+  pawn: {fileID: 104878, guid: 48d5ea4ff810d0e4ea36af7235dd5fd7, type: 3}
+  knight: {fileID: 107724, guid: 7248632fb471af143947a88a47eae959, type: 3}
+  bishop: {fileID: 190264, guid: cd05c23b470229c44a8d53d6e86225f6, type: 3}
+  rook: {fileID: 114028, guid: 43ef2ba32fda59c42a1410ea490d494b, type: 3}
+  queen: {fileID: 103078, guid: 6f38c700bedefe64f8364436528e5c3d, type: 3}
+  king: {fileID: 119820, guid: 9e4e635002b6a524ca896adb28e8e388, type: 3}
+  white: {fileID: 2100000, guid: 7cc7765bd36c641429cf1156966ec78d, type: 2}
+  black: {fileID: 2100000, guid: 913177dc17079c64b9d502133d36ec28, type: 2}

@@ -329,7 +329,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MouseSens: 5
   Speed: 16
---- !u!1001 &8116961963897219054
+--- !u!1001 &1257497042
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -382,55 +382,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8116961963717012934, guid: 507d042690a3983469f0483b1a2e27af, type: 3}
       propertyPath: m_Name
-      value: Board
+      value: ChessBoard
       objectReference: {fileID: 0}
-    - target: {fileID: 8116961965675567264, guid: 507d042690a3983469f0483b1a2e27af, type: 3}
-      propertyPath: king
-      value: 
-      objectReference: {fileID: 107724, guid: 7248632fb471af143947a88a47eae959, type: 3}
-    - target: {fileID: 8116961965675567264, guid: 507d042690a3983469f0483b1a2e27af, type: 3}
-      propertyPath: pawn
-      value: 
-      objectReference: {fileID: 104878, guid: 48d5ea4ff810d0e4ea36af7235dd5fd7, type: 3}
-    - target: {fileID: 8116961965675567264, guid: 507d042690a3983469f0483b1a2e27af, type: 3}
-      propertyPath: rook
-      value: 
-      objectReference: {fileID: 114028, guid: 43ef2ba32fda59c42a1410ea490d494b, type: 3}
-    - target: {fileID: 8116961965675567264, guid: 507d042690a3983469f0483b1a2e27af, type: 3}
-      propertyPath: black
+    - target: {fileID: 8116961963717012935, guid: 507d042690a3983469f0483b1a2e27af, type: 3}
+      propertyPath: blackCell
       value: 
       objectReference: {fileID: 2100000, guid: 057023afac9d48445b45d5a1481496e0, type: 2}
-    - target: {fileID: 8116961965675567264, guid: 507d042690a3983469f0483b1a2e27af, type: 3}
-      propertyPath: queen
-      value: 
-      objectReference: {fileID: 103078, guid: 6f38c700bedefe64f8364436528e5c3d, type: 3}
-    - target: {fileID: 8116961965675567264, guid: 507d042690a3983469f0483b1a2e27af, type: 3}
-      propertyPath: white
+    - target: {fileID: 8116961963717012935, guid: 507d042690a3983469f0483b1a2e27af, type: 3}
+      propertyPath: whiteCell
       value: 
       objectReference: {fileID: 2100000, guid: b2290198fc404d24f8c779978b150c44, type: 2}
-    - target: {fileID: 8116961965675567264, guid: 507d042690a3983469f0483b1a2e27af, type: 3}
-      propertyPath: bishop
-      value: 
-      objectReference: {fileID: 190264, guid: cd05c23b470229c44a8d53d6e86225f6, type: 3}
-    - target: {fileID: 8116961965675567264, guid: 507d042690a3983469f0483b1a2e27af, type: 3}
-      propertyPath: knight
-      value: 
-      objectReference: {fileID: 107724, guid: 7248632fb471af143947a88a47eae959, type: 3}
-    - target: {fileID: 8116961965675567264, guid: 507d042690a3983469f0483b1a2e27af, type: 3}
-      propertyPath: marked
-      value: 
-      objectReference: {fileID: 2100000, guid: d27d820beb32a2b4db98055f1188d2c0, type: 2}
-    - target: {fileID: 8116961965675567267, guid: 507d042690a3983469f0483b1a2e27af, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 8116961965675567267, guid: 507d042690a3983469f0483b1a2e27af, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -12
-      objectReference: {fileID: 0}
-    - target: {fileID: 8116961965675567267, guid: 507d042690a3983469f0483b1a2e27af, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 8
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 507d042690a3983469f0483b1a2e27af, type: 3}
