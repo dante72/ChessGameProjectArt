@@ -13,7 +13,8 @@ public class CameraRotation : MonoBehaviour
     private Quaternion originRotation;   
     private float angleVertical;
     private float angleHorizontal;
-    //private ChessBoard _board;
+
+    private bool freeMode = true;
 
 
 
@@ -27,18 +28,24 @@ public class CameraRotation : MonoBehaviour
 
     void Awake()
     {
-        //_board = new ChessBoard(true);
-        //AuthHttpClient authHttpClient = new AuthHttpClient() { BaseAddress = new Uri("https://localhost:7256/") };
-        //HttpClient httpClient = new HttpClient() { BaseAddress = new Uri("https://localhost:44327/") };
-        // authWebApi = new AuthWebApi(authHttpClient, httpClient);
 
-        //var answ = await authWebApi.Autorization(new AccountRequestModel() { Login= "admin", Password= "admin" });
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.LogWarning("test");
+        if (Input.GetKey(KeyCode.Space))
+        {
+            freeMode = !freeMode;
+            if (freeMode)
+                Cursor.lockState = CursorLockMode.Locked;
+            else
+                Cursor.lockState = CursorLockMode.Confined;
+        }
+
+        if (!freeMode)
+            return;
+
         angleHorizontal += Input.GetAxis("Mouse X") * MouseSens;
         angleVertical += Input.GetAxis("Mouse Y") * MouseSens;
 
