@@ -10,10 +10,12 @@ public class BoardManager : MonoBehaviour
 {
     private const int rows = 8, columns = 8;
     private readonly ChessBoard modelBoard = new ChessBoard(true);
-    private readonly GameObject[,] viewCells = new GameObject[rows, columns]; 
-    
+    internal readonly GameObject[,] viewCells = new GameObject[rows, columns];
+    private readonly List<GameObject> figures = new List<GameObject>();
+
     private float scale = 2;
-    
+
+    public GameObject figurePrefab;
     public GameObject cellPrefab;
     public Material blackCell;
     public Material whiteCell;
@@ -25,6 +27,7 @@ public class BoardManager : MonoBehaviour
     void Start()
     {
         GenerateBoard();
+        GenerateFigures();
     }
 
     // Update is called once per frame
@@ -47,8 +50,21 @@ public class BoardManager : MonoBehaviour
                     viewCell.GetComponent<Renderer>().material = blackCell;
 
                 viewCell.GetComponent<Selectable>().cell = modelBoard.GetCell(row, column);
+
                 viewCells[row, column] = viewCell;
             }
+
+        }
+    }
+
+    private void GenerateFigures()
+    {
+        foreach (var f in modelBoard.Figures)
+        {
+            var figure = Instantiate(figurePrefab);
+            var manager = figure.GetComponent<FigureManager>();
+
+            manager.Figure = f;
 
         }
     }

@@ -3,6 +3,8 @@ using ChessGame;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 
 public class FigureManager : MonoBehaviour
 {
@@ -14,11 +16,36 @@ public class FigureManager : MonoBehaviour
     public GameObject king;
     public Material white;
     public Material black;
-    internal Figure figure;
-    // Start is called before the first frame update
-    void Start()
+
+    public GameObject chessBoard;
+    private BoardManager boardManager;
+
+
+    private Figure _figure;
+    internal Figure Figure
     {
-        CreateFigure();
+        get => _figure;
+        set
+        {
+            _figure = value;
+            if (_figure.Position!= null)
+            {
+                var fp = _figure.Position;
+                var cell = boardManager.viewCells[fp.Row, fp.Column];
+                CreateFigure(_figure, cell.transform);
+            }
+
+
+        }
+    }
+
+    private GameObject this_f;
+
+    private Renderer render;
+    // Start is called before the first frame update
+    void Awake()
+    {
+        boardManager = chessBoard.GetComponent<BoardManager>();
     }
 
     // Update is called once per frame
@@ -27,12 +54,9 @@ public class FigureManager : MonoBehaviour
         
     }
 
-    void CreateFigure()
+    public void CreateFigure(Figure figure, Transform transform)
     {
-        if (figure == null || figure.Position == null)
-            return;
-
-            GameObject figureView = null;
+        GameObject figureView = null;
         switch (figure)
         {
             case Pawn:
@@ -55,14 +79,11 @@ public class FigureManager : MonoBehaviour
                 break;
         }
 
-        if (figureView != null)
-        {
-            var f = Instantiate(figureView, GetComponent<Renderer>().transform.position, figure.Color == FigureColors.White
+        var obj = Instantiate(figureView, transform.position + new Vector3(0, 0.7f, 0), figure.Color == FigureColors.White
                                                                                 ? Quaternion.identity
                                                                                 : Quaternion.Euler(0, 180, 0));
 
-            f.GetComponent<Renderer>().material = figure.Color == FigureColors.White ? white : black;
-
-        }
+        obj.GetComponent<Renderer>().material = figure.Color == FigureColors.White ? white : black;
+        
     }
 }
