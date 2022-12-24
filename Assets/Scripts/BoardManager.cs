@@ -25,6 +25,8 @@ public class BoardManager : MonoBehaviour, IChessObserver, IDisposable
     public Material white;
     public Material black;
 
+    private Dictionary<Type, GameObject> dictionaty = new Dictionary<Type, GameObject>();
+
     private float scale = 2;
 
     public GameObject figurePrefab;
@@ -38,6 +40,13 @@ public class BoardManager : MonoBehaviour, IChessObserver, IDisposable
     // Start is called before the first frame update
     void Start()
     {
+        dictionaty.Add(typeof(Pawn), pawn);
+        dictionaty.Add(typeof(Queen), queen);
+        dictionaty.Add(typeof(King), king);
+        dictionaty.Add(typeof(Knight), knight);
+        dictionaty.Add(typeof(Bishop), bishop);
+        dictionaty.Add(typeof(Rook), rook);
+
         GenerateBoard();
     }
 
@@ -47,10 +56,12 @@ public class BoardManager : MonoBehaviour, IChessObserver, IDisposable
         foreach (var boardCell in boardCells)
         {
 
-            if (boardCell.figure != null && boardCell.cell.Figure != null && boardCell.cell.Figure != boardCell.figure)
+            if (boardCell.figure != null)
+                if (boardCell.cell.Figure != null)
+                    if (boardCell.cell.Figure != boardCell.figure)
             {
                 boardCell.figure = null;
-                boardCell.figureView.transform.position = new Vector3(0, -0.7f, 0);
+                boardCell.figureView.transform.position = new Vector3(0, -2.0f, 0);
             }
 
             if (boardCell.figure == null)
@@ -70,6 +81,7 @@ public class BoardManager : MonoBehaviour, IChessObserver, IDisposable
         }
     }
 
+
     private void GenerateBoard()
     {
         for (int row = 0; row < rows; row++)
@@ -78,15 +90,12 @@ public class BoardManager : MonoBehaviour, IChessObserver, IDisposable
             {
                 var viewCell = Instantiate(cellPrefab, new Vector3(column * scale, 0, (rows - 1 - row) * scale), Quaternion.identity);
 
-                if (row % 2 == column % 2)
-                    viewCell.GetComponent<Renderer>().material = whiteCell;
-                else
-                    viewCell.GetComponent<Renderer>().material = blackCell;
 
                 var cellModel = modelBoard.GetCell(row, column);
 
-                viewCell.GetComponent<Selectable>().cell = cellModel;
+                viewCell.GetComponent<Selectable>().OnInit(cellModel);
 
+               
                 var figureView = CreateFigure(cellModel.Figure, viewCell);
 
                 boardCells[row, column] = new BoardCell(viewCell, figureView, cellModel, cellModel.Figure);
@@ -100,8 +109,9 @@ public class BoardManager : MonoBehaviour, IChessObserver, IDisposable
         if (figure == null)
             return null;
 
-        GameObject figureView = null;
-        switch (figure)
+        GameObject figurePrefab = dictionaty[typeof(Pawn)];
+        
+        /*switch (figure)
         {
             case Pawn:
                 figureView = pawn;
@@ -121,15 +131,13 @@ public class BoardManager : MonoBehaviour, IChessObserver, IDisposable
             case King:
                 figureView = king;
                 break;
-        }
+        }*/
 
-        figureView = Instantiate(figureView, cell.transform.position + new Vector3(0, 0.7f, 0), figure.Color == FigureColors.White
-                                                                                ? Quaternion.identity
-                                                                                : Quaternion.Euler(0, 180, 0));
+        var figureInctance = Instantiate(figurePrefab, cell.transform.position + new Vector3(0, 0.7f, 0), Quaternion.identity);
 
-        figureView.GetComponent<Renderer>().material = figure.Color == FigureColors.White ? white : black;
+        figureInctance.GetComponent<FigureManager>().Init(figure.Color);
 
-        return figureView;
+        return figureInctance;
     }
 
     public Task UpdateAsync()

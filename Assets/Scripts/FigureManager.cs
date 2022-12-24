@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
+using System;
 
 public class FigureManager : MonoBehaviour
 {
@@ -60,36 +61,12 @@ public class FigureManager : MonoBehaviour
         
     }
 
-    public void CreateFigure(Figure figure, GameObject cell)
+    internal void Init(FigureColors color)
     {
-        GameObject figureView = null;
-        switch (figure)
-        {
-            case Pawn:
-                figureView = pawn;
-                break;
-            case Knight:
-                figureView = knight;
-                break;
-            case Rook:
-                figureView = rook;
-                break;
-            case Bishop:
-                figureView = bishop;
-                break;
-            case Queen:
-                figureView = queen;
-                break;
-            case King:
-                figureView = king;
-                break;
-        }
+        transform.rotation = color == FigureColors.White
+            ? Quaternion.identity
+            : Quaternion.Euler(0, 180, 0);
 
-        figureView = Instantiate(figureView, cell.transform.position + new Vector3(0, 0.7f, 0), figure.Color == FigureColors.White
-                                                                                ? Quaternion.identity
-                                                                                : Quaternion.Euler(0, 180, 0));
-
-        figureView.GetComponent<Renderer>().material = figure.Color == FigureColors.White ? white : black;
-        this.cell = cell;
+        GetComponentInChildren<Renderer>().material = color == FigureColors.White ? white : black;
     }
 }

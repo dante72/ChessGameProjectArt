@@ -13,25 +13,41 @@ public class Selectable : MonoBehaviour, IChessObserver, IDisposable
     private Material general;
     public Material selected;
     public Material marked;
-    internal ChessCell cell;
+    internal ChessCell chessCell;
     private Renderer _renderer;
+    public Material white;
+    public Material black;
 
-    internal int Row => cell.Row;
-    internal int Column => cell.Column;
+    internal int Row => chessCell.Row;
+    internal int Column => chessCell.Column;
 
     private bool isRendered = true;
 
+    void Awake()
+    {
+        _renderer = GetComponent<Renderer>();
+    }
     private void Start()
     {
-        if (cell != null)
+        if (chessCell != null)
         {
-            ((IChessObservable)cell).Subscribe(this);
+            ((IChessObservable)chessCell).Subscribe(this);
+        }
+    }
+
+    public void OnInit(ChessCell chessCell)
+    {
+        this.chessCell = chessCell;
+        if (Row % 2 == Column % 2)
+        {
+            _renderer.material = white;
+        }
+        else
+        {
+            _renderer.material = black;
         }
 
-        _renderer = GetComponent<Renderer>();
-
         general = _renderer.material;
-        
     }
     public void Select()
     {
@@ -45,7 +61,7 @@ public class Selectable : MonoBehaviour, IChessObserver, IDisposable
 
     public async void Click()
     {
-        await cell.Click();
+        await chessCell.Click();
     }
 
     void Update()
@@ -56,13 +72,13 @@ public class Selectable : MonoBehaviour, IChessObserver, IDisposable
 
     private void UpdateCell()
     {
-        if (cell != null)
+        if (chessCell != null)
         {
-            if (cell.IsMarked)
-                _renderer.material = marked;
-            else
-                _renderer.material = general;
+            if (chessCell.IsMarked && _renderer.material != marked)
+                    _renderer.material = marked;
 
+            else if (_renderer.material != general)
+                _renderer.material = general;
         }
     }
 
@@ -75,6 +91,6 @@ public class Selectable : MonoBehaviour, IChessObserver, IDisposable
 
     public void Dispose()
     {
-        ((IChessObservable)cell).Remove(this);
+        ((IChessObservable)chessCell).Remove(this);
     }
 }
