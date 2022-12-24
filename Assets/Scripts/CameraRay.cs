@@ -12,11 +12,11 @@ public class CameraRay : MonoBehaviour
 
     private Selectable current;
 
-    // Update is called once per frame
-    void LateUpdate()
+
+    private void LateUpdate()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        Debug.DrawRay(transform.position, transform.forward, Color.yellow);
+        //Debug.DrawRay(transform.position, transform.forward, Color.yellow);
 
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))

@@ -10,11 +10,16 @@ using UnityEngine.UIElements;
 
 public class Selectable : MonoBehaviour, IChessObserver, IDisposable
 {
-    private Material deselected;
+    private Material general;
     public Material selected;
     public Material marked;
     internal ChessCell cell;
-    private Renderer renderer;
+    private Renderer _renderer;
+
+    internal int Row => cell.Row;
+    internal int Column => cell.Column;
+
+    private bool isRendered = true;
 
     private void Start()
     {
@@ -23,39 +28,48 @@ public class Selectable : MonoBehaviour, IChessObserver, IDisposable
             ((IChessObservable)cell).Subscribe(this);
         }
 
-        renderer = GetComponent<Renderer>();
+        _renderer = GetComponent<Renderer>();
 
-        deselected = renderer.material;
+        general = _renderer.material;
         
     }
     public void Select()
     {
-        renderer.material = selected;
+        _renderer.material = selected;
     }
 
     public void Deselect()
     {
-        renderer.material = deselected;
+        _renderer.material = general;
     }
 
-    public void Click()
+    public async void Click()
     {
-        cell.Click();
+        await cell.Click();
     }
 
     void Update()
     {
+        UpdateCell();
+
+    }
+
+    private void UpdateCell()
+    {
         if (cell != null)
         {
             if (cell.IsMarked)
-                renderer.material.color = Color.green;
+                _renderer.material = marked;
+            else
+                _renderer.material = general;
 
         }
     }
 
     public Task UpdateAsync()
     {
-        //throw new NotImplementedException();
+        //UpdateCell();
+
         return Task.CompletedTask;
     }
 

@@ -19,6 +19,17 @@ public class FigureManager : MonoBehaviour
 
     public GameObject chessBoard;
     private BoardManager boardManager;
+    internal GameObject cell;
+    private GameObject figureView;
+
+    internal GameObject Cell {
+        get => cell;
+        set
+        {
+            cell = value;
+            figureView.transform.position = cell.transform.position;
+        }
+    }
 
 
     private Figure _figure;
@@ -28,21 +39,16 @@ public class FigureManager : MonoBehaviour
         set
         {
             _figure = value;
-            if (_figure.Position!= null)
-            {
-                var fp = _figure.Position;
-                var cell = boardManager.viewCells[fp.Row, fp.Column];
-                CreateFigure(_figure, cell.transform);
-            }
+            //if (_figure.Position!= null)
+            //{
+            //    var fp = _figure.Position;
+            //    var cell = boardManager.boardCells[fp.Row, fp.Column].cellView;
+            //    CreateFigure(_figure, cell);
+            //}
 
 
         }
     }
-
-    private GameObject this_f;
-
-    private Renderer render;
-    // Start is called before the first frame update
     void Awake()
     {
         boardManager = chessBoard.GetComponent<BoardManager>();
@@ -54,7 +60,7 @@ public class FigureManager : MonoBehaviour
         
     }
 
-    public void CreateFigure(Figure figure, Transform transform)
+    public void CreateFigure(Figure figure, GameObject cell)
     {
         GameObject figureView = null;
         switch (figure)
@@ -79,11 +85,11 @@ public class FigureManager : MonoBehaviour
                 break;
         }
 
-        var obj = Instantiate(figureView, transform.position + new Vector3(0, 0.7f, 0), figure.Color == FigureColors.White
+        figureView = Instantiate(figureView, cell.transform.position + new Vector3(0, 0.7f, 0), figure.Color == FigureColors.White
                                                                                 ? Quaternion.identity
                                                                                 : Quaternion.Euler(0, 180, 0));
 
-        obj.GetComponent<Renderer>().material = figure.Color == FigureColors.White ? white : black;
-        
+        figureView.GetComponent<Renderer>().material = figure.Color == FigureColors.White ? white : black;
+        this.cell = cell;
     }
 }
