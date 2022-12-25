@@ -6,18 +6,14 @@ using System;
 //using ChessGame;
 
 public class CameraRotation : MonoBehaviour
-{
-    public float MouseSens = 5;
-    public float Speed = 16;
-
+{   
     private Quaternion originRotation;   
     private float angleVertical;
     private float angleHorizontal;
-
     private bool freeMode = true;
 
-
-
+    public float MouseSens = 5;
+    public float Speed = 16;
 
     // Start is called before the first frame update
     void Start()

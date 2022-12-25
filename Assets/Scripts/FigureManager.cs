@@ -9,6 +9,11 @@ using System;
 
 public class FigureManager : MonoBehaviour
 {
+    private BoardManager chessBoard;
+    private GameObject cell;
+    private Cell Selectable;
+    private GameObject figureInstance;
+
     public GameObject pawn;
     public GameObject knight;
     public GameObject bishop;
@@ -17,12 +22,9 @@ public class FigureManager : MonoBehaviour
     public GameObject king;
     public Material white;
     public Material black;
+    public GameObject chessBoardObject;
 
-    public GameObject chessBoard;
-    private BoardManager boardManager;
-    private GameObject cell;
-    private Selectable Selectable;
-    private GameObject figureInstance;
+
 
     private bool hasInitialized = false;
 
@@ -33,7 +35,7 @@ public class FigureManager : MonoBehaviour
             cell = value;
             if (cell)
             {
-                Selectable = cell.GetComponent<Selectable>();
+                Selectable = cell.GetComponent<Cell>();
                 transform.position = cell.transform.position;
             }
             else
@@ -56,7 +58,7 @@ public class FigureManager : MonoBehaviour
     }
     void Awake()
     {
-        boardManager = chessBoard.GetComponent<BoardManager>();
+        chessBoard = chessBoardObject.GetComponent<BoardManager>();
     }
 
     // Update is called once per frame
@@ -64,6 +66,10 @@ public class FigureManager : MonoBehaviour
     {
         if (!hasInitialized)
             return;
+
+        if (Cell == null)
+            return;
+
         if (Figure.Position.Figure != Figure)
         {
             RemoveFigure();
@@ -73,7 +79,7 @@ public class FigureManager : MonoBehaviour
         if (Figure.Position.Row == Selectable.Row && Figure.Position.Column == Selectable.Column)
             return;
         
-        Cell = boardManager.cells[Figure.Position.Row, Figure.Position.Column];
+        Cell = chessBoard.cells[Figure.Position.Row, Figure.Position.Column];
     }
 
     internal void OnInit(Figure figure, GameObject cell)
