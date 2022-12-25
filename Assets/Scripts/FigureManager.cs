@@ -20,15 +20,27 @@ public class FigureManager : MonoBehaviour
 
     public GameObject chessBoard;
     private BoardManager boardManager;
-    internal GameObject cell;
+    private GameObject cell;
+    private Selectable Selectable;
     private GameObject figureInstance;
+
+    private bool hasInitialized = false;
 
     internal GameObject Cell {
         get => cell;
         set
         {
             cell = value;
-            transform.position = cell.transform.position;
+            if (cell)
+            {
+                Selectable = cell.GetComponent<Selectable>();
+                transform.position = cell.transform.position;
+            }
+            else
+            {
+                Selectable = null;
+                transform.position = new Vector3(-2, 0, -2);
+            }
         }
     }
 
@@ -50,7 +62,18 @@ public class FigureManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!hasInitialized)
+            return;
+        if (Figure.Position.Figure != Figure)
+        {
+            RemoveFigure();
+            return;
+        }
+
+        if (Figure.Position.Row == Selectable.Row && Figure.Position.Column == Selectable.Column)
+            return;
         
+        Cell = boardManager.cells[Figure.Position.Row, Figure.Position.Column];
     }
 
     internal void OnInit(Figure figure, GameObject cell)
@@ -59,6 +82,13 @@ public class FigureManager : MonoBehaviour
         Cell = cell;
 
         CreateFigure(figure, cell);
+
+        hasInitialized = true;
+    }
+
+    private void RemoveFigure()
+    {
+        Cell = null;
     }
 
     private GameObject CreateFigure(Figure figure, GameObject cell)

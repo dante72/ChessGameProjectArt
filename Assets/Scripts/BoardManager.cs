@@ -11,8 +11,8 @@ using UnityEngine;
 public class BoardManager : MonoBehaviour, IChessObserver, IDisposable
 {
     private const int rows = 8, columns = 8;
-    private readonly ChessBoard modelBoard = new ChessBoard(true, true);
-    internal readonly BoardCell[,] boardCells = new BoardCell[rows, columns];
+    internal readonly ChessBoard modelBoard = new ChessBoard(true, true);
+    internal readonly GameObject[,] cells = new GameObject[rows, columns];
 
     public GameObject figurePrefab;
     public GameObject pawn;
@@ -51,7 +51,7 @@ public class BoardManager : MonoBehaviour, IChessObserver, IDisposable
     // Update is called once per frame
     void FixedUpdate()
     {
-        foreach (var boardCell in boardCells)
+        /*foreach (var boardCell in boardCells)
         {
 
             if (boardCell.figure != null)
@@ -76,7 +76,7 @@ public class BoardManager : MonoBehaviour, IChessObserver, IDisposable
             boardCell.figureView = null;
             boardCells[boardCell.figure.Position.Row, boardCell.figure.Position.Column].figure = boardCell.figure;
             boardCell.figure = null;
-        }
+        }*/
     }
 
 
@@ -96,7 +96,9 @@ public class BoardManager : MonoBehaviour, IChessObserver, IDisposable
                
                 var figureView = CreateFigure(cellModel.Figure, viewCell);
 
-                boardCells[row, column] = new BoardCell(viewCell, figureView, cellModel, cellModel.Figure);
+                cells[row, column] = viewCell;
+
+                //boardCells[row, column] = new BoardCell(viewCell, figureView, cellModel, cellModel.Figure);
             }
 
         }
