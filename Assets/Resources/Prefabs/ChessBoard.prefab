@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8116961963717012932}
-  - component: {fileID: 8116961963717012935}
+  - component: {fileID: 7930321330274354052}
   m_Layer: 0
   m_Name: ChessBoard
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8116961963717012935
+--- !u!114 &7930321330274354052
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,18 +41,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8116961963717012934}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b86152d31c1517a4994600ead29dcfd0, type: 3}
+  m_Script: {fileID: 11500000, guid: 4fed2d2ebca24ad4c8b0868a7c2fb14c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pawn: {fileID: 104878, guid: 48d5ea4ff810d0e4ea36af7235dd5fd7, type: 3}
-  knight: {fileID: 107724, guid: 7248632fb471af143947a88a47eae959, type: 3}
-  bishop: {fileID: 190264, guid: cd05c23b470229c44a8d53d6e86225f6, type: 3}
-  rook: {fileID: 114028, guid: 43ef2ba32fda59c42a1410ea490d494b, type: 3}
-  queen: {fileID: 103078, guid: 6f38c700bedefe64f8364436528e5c3d, type: 3}
-  king: {fileID: 119820, guid: 9e4e635002b6a524ca896adb28e8e388, type: 3}
-  white: {fileID: 2100000, guid: 7cc7765bd36c641429cf1156966ec78d, type: 2}
-  black: {fileID: 2100000, guid: 913177dc17079c64b9d502133d36ec28, type: 2}
-  figurePrefab: {fileID: 7673220933245632751, guid: f9c81def5603be84f893e05c63a96740, type: 3}
+  figureObject: {fileID: 0}
   cellPrefab: {fileID: 1324103971359918624, guid: 483f6e01bd15f834aa72502044be2485, type: 3}
-  blackCell: {fileID: 2100000, guid: 057023afac9d48445b45d5a1481496e0, type: 2}
-  whiteCell: {fileID: 2100000, guid: b2290198fc404d24f8c779978b150c44, type: 2}
+  black: {fileID: 2100000, guid: 057023afac9d48445b45d5a1481496e0, type: 2}
+  white: {fileID: 2100000, guid: b2290198fc404d24f8c779978b150c44, type: 2}

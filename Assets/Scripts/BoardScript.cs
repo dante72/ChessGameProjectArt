@@ -8,12 +8,12 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
-public class BoardManager : MonoBehaviour
+public class BoardScript : MonoBehaviour
 {
     private const int rows = 8, columns = 8;
     private float scale = 2;
 
-    internal readonly ChessBoard modelBoard = new ChessBoard(true, true);
+    internal readonly ChessBoard chessBoard = new ChessBoard(true, true);
     internal readonly GameObject[,] cells = new GameObject[rows, columns];
 
     public GameObject figureObject;
@@ -41,10 +41,9 @@ public class BoardManager : MonoBehaviour
             {
                 var viewCell = Instantiate(cellPrefab, new Vector3(column * scale, 0, (rows - 1 - row) * scale), Quaternion.identity);
 
+                var cellModel = chessBoard.GetCell(row, column);
 
-                var cellModel = modelBoard.GetCell(row, column);
-
-                viewCell.GetComponent<Cell>().OnInit(cellModel);
+                viewCell.GetComponent<CellScript>().OnInit(cellModel);
 
                 CreateFigure(cellModel.Figure, viewCell);
 
@@ -60,7 +59,7 @@ public class BoardManager : MonoBehaviour
 
         var figureInctance = Instantiate(figureObject, cell.transform.position, Quaternion.identity);
 
-        figureInctance.GetComponent<FigureManager>().OnInit(figure, cell);
+        figureInctance.GetComponent<FigureScript>().OnInit(figure, cell);
 
         return figureInctance;
     }

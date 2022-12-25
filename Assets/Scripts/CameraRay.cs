@@ -10,7 +10,7 @@ public class CameraRay : MonoBehaviour
         
     }
 
-    private Cell current;
+    private CellScript current;
 
     private void LateUpdate()
     {
@@ -22,7 +22,7 @@ public class CameraRay : MonoBehaviour
         {
             //Debug.Log("Mouse on");
 
-            var selectable = hit.collider.gameObject.GetComponent<Cell>();
+            var selectable = hit.collider.gameObject.GetComponent<CellScript>();
             if (selectable)
             {
                 if (current && current != selectable)

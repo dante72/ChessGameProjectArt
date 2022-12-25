@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1324103971359918629}
   - component: {fileID: 1324103971359918626}
   - component: {fileID: 1324103971359918627}
-  - component: {fileID: 1324103971359918631}
+  - component: {fileID: 3862718405620410197}
   m_Layer: 0
   m_Name: ChessCell
   m_TagString: Untagged
@@ -98,7 +98,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1324103971359918631
+--- !u!114 &3862718405620410197
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -107,10 +107,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1324103971359918624}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 648b9ee8ffb5add4681bd7da0f844e4b, type: 3}
+  m_Script: {fileID: 11500000, guid: 4042983615262604583dfe5156141097, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   selected: {fileID: 2100000, guid: 615ecaaf4230045489e848eeb2c664c1, type: 2}
   marked: {fileID: 2100000, guid: d27d820beb32a2b4db98055f1188d2c0, type: 2}
-  white: {fileID: 2100000, guid: 7cc7765bd36c641429cf1156966ec78d, type: 2}
-  black: {fileID: 2100000, guid: 913177dc17079c64b9d502133d36ec28, type: 2}
+  white: {fileID: 2100000, guid: b2290198fc404d24f8c779978b150c44, type: 2}
+  black: {fileID: 2100000, guid: 057023afac9d48445b45d5a1481496e0, type: 2}

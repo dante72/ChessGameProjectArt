@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7673220933245632750}
-  - component: {fileID: 5437553565944660105}
+  - component: {fileID: -8529674618943330360}
   m_Layer: 0
   m_Name: ChessFigure
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5437553565944660105
+--- !u!114 &-8529674618943330360
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,7 +41,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7673220933245632751}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52cfa1ccf4bbed5449eb350f18403704, type: 3}
+  m_Script: {fileID: 11500000, guid: 7959e511165d5414da7a8450957ce265, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pawn: {fileID: 104878, guid: 48d5ea4ff810d0e4ea36af7235dd5fd7, type: 3}
@@ -52,4 +52,4 @@ MonoBehaviour:
   king: {fileID: 119820, guid: 9e4e635002b6a524ca896adb28e8e388, type: 3}
   white: {fileID: 2100000, guid: 7cc7765bd36c641429cf1156966ec78d, type: 2}
   black: {fileID: 2100000, guid: 913177dc17079c64b9d502133d36ec28, type: 2}
-  chessBoard: {fileID: 8116961963717012934, guid: 507d042690a3983469f0483b1a2e27af, type: 3}
+  boardObject: {fileID: 0}

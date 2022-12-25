@@ -7,11 +7,11 @@ using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using System;
 
-public class FigureManager : MonoBehaviour
+public class FigureScript : MonoBehaviour
 {
-    private BoardManager chessBoard;
+    private BoardScript boardScript;
     private GameObject cell;
-    private Cell Selectable;
+    private CellScript cellScript;
     private GameObject figureInstance;
 
     public GameObject pawn;
@@ -22,7 +22,7 @@ public class FigureManager : MonoBehaviour
     public GameObject king;
     public Material white;
     public Material black;
-    public GameObject chessBoardObject;
+    public GameObject boardObject;
 
 
 
@@ -35,12 +35,12 @@ public class FigureManager : MonoBehaviour
             cell = value;
             if (cell)
             {
-                Selectable = cell.GetComponent<Cell>();
+                cellScript = cell.GetComponent<CellScript>();
                 transform.position = cell.transform.position;
             }
             else
             {
-                Selectable = null;
+                cellScript = null;
                 transform.position = new Vector3(-2, 0, -2);
             }
         }
@@ -58,7 +58,7 @@ public class FigureManager : MonoBehaviour
     }
     void Awake()
     {
-        chessBoard = chessBoardObject.GetComponent<BoardManager>();
+        boardScript = boardObject.GetComponent<BoardScript>();
     }
 
     // Update is called once per frame
@@ -76,10 +76,10 @@ public class FigureManager : MonoBehaviour
             return;
         }
 
-        if (Figure.Position.Row == Selectable.Row && Figure.Position.Column == Selectable.Column)
+        if (Figure.Position.Row == cellScript.Row && Figure.Position.Column == cellScript.Column)
             return;
         
-        Cell = chessBoard.cells[Figure.Position.Row, Figure.Position.Column];
+        Cell = boardScript.cells[Figure.Position.Row, Figure.Position.Column];
     }
 
     internal void OnInit(Figure figure, GameObject cell)
@@ -103,6 +103,7 @@ public class FigureManager : MonoBehaviour
             return null;
 
         GameObject figurePrefab = null;
+
         switch (figure)
         {
             case Pawn:
@@ -126,15 +127,11 @@ public class FigureManager : MonoBehaviour
         }
 
         figureInstance = Instantiate(figurePrefab, cell.transform.position, Quaternion.identity);
-
         figureInstance.transform.SetParent(transform);
-
         figureInstance.transform.position += CorrectTransform(figure);
-
         transform.rotation = figure.Color == FigureColor.White
                         ? Quaternion.identity
                         : Quaternion.Euler(0, 180, 0);
-
         GetComponentInChildren<Renderer>().material = figure.Color == FigureColor.White ? white : black;
 
         return figureInstance;

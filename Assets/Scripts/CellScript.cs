@@ -8,9 +8,9 @@ using UnityEngine;
 using UnityEngine.Timeline;
 using UnityEngine.UIElements;
 
-public class Cell : MonoBehaviour
+public class CellScript : MonoBehaviour
 {
-    private Material general;
+    private Material _general;
     private Renderer _renderer;
     
     internal ChessCell chessCell;
@@ -40,7 +40,7 @@ public class Cell : MonoBehaviour
             _renderer.material = black;
         }
 
-        general = _renderer.material;
+        _general = _renderer.material;
     }
     public void Select()
     {
@@ -49,7 +49,7 @@ public class Cell : MonoBehaviour
 
     public void Deselect()
     {
-        _renderer.material = general;
+        _renderer.material = _general;
     }
 
     public async void Click()
@@ -69,8 +69,8 @@ public class Cell : MonoBehaviour
             if (chessCell.IsMarked && _renderer.material != marked)
                     _renderer.material = marked;
 
-            else if (_renderer.material != general)
-                _renderer.material = general;
+            else if (_renderer.material != _general)
+                _renderer.material = _general;
         }
     }
 }
