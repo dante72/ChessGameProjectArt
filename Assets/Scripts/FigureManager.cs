@@ -21,14 +21,14 @@ public class FigureManager : MonoBehaviour
     public GameObject chessBoard;
     private BoardManager boardManager;
     internal GameObject cell;
-    private GameObject figureView;
+    private GameObject figureInstance;
 
     internal GameObject Cell {
         get => cell;
         set
         {
             cell = value;
-            figureView.transform.position = cell.transform.position;
+            transform.position = cell.transform.position;
         }
     }
 
@@ -40,14 +40,6 @@ public class FigureManager : MonoBehaviour
         set
         {
             _figure = value;
-            //if (_figure.Position!= null)
-            //{
-            //    var fp = _figure.Position;
-            //    var cell = boardManager.boardCells[fp.Row, fp.Column].cellView;
-            //    CreateFigure(_figure, cell);
-            //}
-
-
         }
     }
     void Awake()
@@ -61,12 +53,59 @@ public class FigureManager : MonoBehaviour
         
     }
 
-    internal void Init(FigureColors color)
+    internal void OnInit(Figure figure, GameObject cell)
     {
-        transform.rotation = color == FigureColors.White
-            ? Quaternion.identity
-            : Quaternion.Euler(0, 180, 0);
+        Figure = figure;
+        Cell = cell;
 
-        GetComponentInChildren<Renderer>().material = color == FigureColors.White ? white : black;
+        CreateFigure(figure, cell);
+    }
+
+    private GameObject CreateFigure(Figure figure, GameObject cell)
+    {
+        if (figure == null)
+            return null;
+
+        GameObject figurePrefab = null;
+        switch (figure)
+        {
+            case Pawn:
+                figurePrefab = pawn;
+                break;
+            case Knight:
+                figurePrefab = knight;
+                break;
+            case Rook:
+                figurePrefab = rook;
+                break;
+            case Bishop:
+                figurePrefab = bishop;
+                break;
+            case Queen:
+                figurePrefab = queen;
+                break;
+            case King:
+                figurePrefab = king;
+                break;
+        }
+
+        figureInstance = Instantiate(figurePrefab, cell.transform.position, Quaternion.identity);
+
+        figureInstance.transform.SetParent(transform);
+
+        figureInstance.transform.position += CorrectTransform(figure);
+
+        transform.rotation = figure.Color == FigureColor.White
+                        ? Quaternion.identity
+                        : Quaternion.Euler(0, 180, 0);
+
+        GetComponentInChildren<Renderer>().material = figure.Color == FigureColor.White ? white : black;
+
+        return figureInstance;
+    }
+
+    private Vector3 CorrectTransform(Figure figure)
+    {
+        return figure is Pawn ? new Vector3(0, 0.5f) : new Vector3(0, 0.7f);
     }
 }

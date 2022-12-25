@@ -13,9 +13,8 @@ public class BoardManager : MonoBehaviour, IChessObserver, IDisposable
     private const int rows = 8, columns = 8;
     private readonly ChessBoard modelBoard = new ChessBoard(true, true);
     internal readonly BoardCell[,] boardCells = new BoardCell[rows, columns];
-    //private readonly GameObject[,] figures = new GameObject[rows, columns];
-    //private readonly List<FigureManager> figuresManager = new List<FigureManager>();
 
+    public GameObject figurePrefab;
     public GameObject pawn;
     public GameObject knight;
     public GameObject bishop;
@@ -25,11 +24,10 @@ public class BoardManager : MonoBehaviour, IChessObserver, IDisposable
     public Material white;
     public Material black;
 
-    private Dictionary<Type, GameObject> dictionaty = new Dictionary<Type, GameObject>();
+    private Dictionary<Type, GameObject> dictionary = new Dictionary<Type, GameObject>();
 
     private float scale = 2;
 
-    public GameObject figurePrefab;
     public GameObject cellPrefab;
     public Material blackCell;
     public Material whiteCell;
@@ -40,12 +38,12 @@ public class BoardManager : MonoBehaviour, IChessObserver, IDisposable
     // Start is called before the first frame update
     void Start()
     {
-        dictionaty.Add(typeof(Pawn), pawn);
-        dictionaty.Add(typeof(Queen), queen);
-        dictionaty.Add(typeof(King), king);
-        dictionaty.Add(typeof(Knight), knight);
-        dictionaty.Add(typeof(Bishop), bishop);
-        dictionaty.Add(typeof(Rook), rook);
+        dictionary.Add(typeof(Pawn), pawn);
+        dictionary.Add(typeof(Queen), queen);
+        dictionary.Add(typeof(King), king);
+        dictionary.Add(typeof(Knight), knight);
+        dictionary.Add(typeof(Bishop), bishop);
+        dictionary.Add(typeof(Rook), rook);
 
         GenerateBoard();
     }
@@ -73,7 +71,7 @@ public class BoardManager : MonoBehaviour, IChessObserver, IDisposable
 
 
 
-            boardCell.figureView.transform.position = boardCells[boardCell.figure.Position.Row, boardCell.figure.Position.Column].cellView.transform.position + new Vector3(0, 0.7f, 0);
+            boardCell.figureView.transform.position = boardCells[boardCell.figure.Position.Row, boardCell.figure.Position.Column].cellView.transform.position;
             boardCells[boardCell.figure.Position.Row, boardCell.figure.Position.Column].figureView = boardCell.figureView;
             boardCell.figureView = null;
             boardCells[boardCell.figure.Position.Row, boardCell.figure.Position.Column].figure = boardCell.figure;
@@ -109,7 +107,7 @@ public class BoardManager : MonoBehaviour, IChessObserver, IDisposable
         if (figure == null)
             return null;
 
-        GameObject figurePrefab = dictionaty[typeof(Pawn)];
+        //GameObject figurePrefab = dictionary[figure.GetType()];
         
         /*switch (figure)
         {
@@ -133,9 +131,9 @@ public class BoardManager : MonoBehaviour, IChessObserver, IDisposable
                 break;
         }*/
 
-        var figureInctance = Instantiate(figurePrefab, cell.transform.position + new Vector3(0, 0.7f, 0), Quaternion.identity);
+        var figureInctance = Instantiate(figurePrefab, cell.transform.position, Quaternion.identity);
 
-        figureInctance.GetComponent<FigureManager>().Init(figure.Color);
+        figureInctance.GetComponent<FigureManager>().OnInit(figure, cell);
 
         return figureInctance;
     }

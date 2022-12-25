@@ -1,15 +1,7 @@
 fileFormatVersion: 2
-guid: 7248632fb471af143947a88a47eae959
-labels:
-- chess
-- board
-- boardgame
-- game
-- chessboard
-- Knight
-timeCreated: 1462534794
-licenseType: Store
-NativeFormatImporter:
+guid: fa5e0891646b6e0409e64e1e9af8abac
+PrefabImporter:
+  externalObjects: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 
