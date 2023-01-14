@@ -9,7 +9,6 @@ using System;
 
 public class FigureScript : MonoBehaviour
 {
-    private BoardScript boardScript;
     private GameObject cell;
     private CellScript cellScript;
     private GameObject figureInstance;
@@ -23,6 +22,8 @@ public class FigureScript : MonoBehaviour
     public Material white;
     public Material black;
     public GameObject boardObject;
+
+    private BoardScript boardScript;
 
 
 

@@ -7,14 +7,17 @@ using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class BoardScript : MonoBehaviour
 {
     private const int rows = 8, columns = 8;
     private float scale = 2;
 
-    internal readonly ChessBoard chessBoard = new ChessBoard(true, true);
+    private ChessBoard _chessBoard;
+
     internal readonly GameObject[,] cells = new GameObject[rows, columns];
+    internal readonly List<GameObject> figures = new List<GameObject>();
 
     public GameObject figureObject;
     public GameObject cellPrefab;
@@ -24,6 +27,8 @@ public class BoardScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _chessBoard = GameClientV2.Client.chessBoard;
+        //_chessBoard = new ChessBoard(true, true);
         GenerateBoard();
     }
 
@@ -33,7 +38,7 @@ public class BoardScript : MonoBehaviour
 
     }
 
-    private void GenerateBoard()
+    public void GenerateBoard()
     {
         for (int row = 0; row < rows; row++)
         {
@@ -41,11 +46,11 @@ public class BoardScript : MonoBehaviour
             {
                 var viewCell = Instantiate(cellPrefab, new Vector3(column * scale, 0, (rows - 1 - row) * scale), Quaternion.identity);
 
-                var cellModel = chessBoard.GetCell(row, column);
+                var cellModel = _chessBoard.GetCell(row, column);
 
                 viewCell.GetComponent<CellScript>().OnInit(cellModel);
 
-                CreateFigure(cellModel.Figure, viewCell);
+                figures.Add(CreateFigure(cellModel.Figure, viewCell));
 
                 cells[row, column] = viewCell;
             }

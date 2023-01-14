@@ -1,15 +1,14 @@
-using ChessGameClient;
 using ChessGameClient.AuthWebAPI;
-using ChessGameClient.Services;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
+
 using UnityEngine;
 
 public class LoginSqript : MonoBehaviour
 {
     // Start is called before the first frame update
+
+    public GameObject menuComponent;
+    public GameObject loginComponent;
     void Start()
     {
         
@@ -27,14 +26,18 @@ public class LoginSqript : MonoBehaviour
 
         try
         {
-            var result = await GameClient.Client.authService.Autorization(new AccountRequestModel()
+            var result = await GameClientV2.Client.authService.Autorization(new AccountRequestModel()
             {
                 Login = "admin",
                 Password = "admin"
             });
 
             if (result)
+            {
                 Debug.Log($"Success!");
+                loginComponent.SetActive(false);
+                menuComponent.SetActive(true);
+            }
             else
                 Debug.Log($"incorrect login or password!");
         }
