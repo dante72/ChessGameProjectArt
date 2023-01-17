@@ -44,7 +44,13 @@ public class GameHubServiceImplV2 : GameHubServiceImpl
     public override void OnReceiveBoardAction()
     {
         BoardScript.Mode = 1;
-        MenuScript.closeMenu = true;
         BoardScript.Reload = true;
+        if (_board.Player != null)
+        {
+            if (_board.Player.Color == FigureColor.White)
+                CameraPosition.Mode = CameraMode.White;
+            else
+                CameraPosition.Mode = CameraMode.Black;
+        }
     }
 }
