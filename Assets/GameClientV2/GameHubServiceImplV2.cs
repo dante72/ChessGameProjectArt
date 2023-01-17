@@ -43,6 +43,8 @@ public class GameHubServiceImplV2 : GameHubServiceImpl
 
     public override void OnReceiveBoardAction()
     {
-        MenuScript.flag = true;
+        BoardScript.Mode = 1;
+        MenuScript.closeMenu = true;
+        BoardScript.Reload = true;
     }
 }

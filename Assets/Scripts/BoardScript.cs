@@ -23,23 +23,52 @@ public class BoardScript : MonoBehaviour
     public GameObject cellPrefab;
     public Material black;
     public Material white;
+    public static int Mode = 0;
+
+    public static bool Reload = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        _chessBoard = GameClientV2.Client.chessBoard;
-        //_chessBoard = new ChessBoard(true, true);
+
         GenerateBoard();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Reload)
+        {
+            Reload = false;
+            RegenerateBoard();
+        }
+    }
 
+    public void RegenerateBoard()
+    {
+        foreach (var figure in figures)
+            Destroy(figure);
+
+        foreach(var cell in cells)
+            Destroy(cell);
+
+        figures.Clear();
+
+        GenerateBoard();
     }
 
     public void GenerateBoard()
     {
+        switch (Mode)
+        {
+            case 0:
+                _chessBoard = new ChessBoard(true, true);
+                break;
+            case 1:
+                _chessBoard = GameClientV2.Client.chessBoard;
+                break;
+        }
+
         for (int row = 0; row < rows; row++)
         {
             for(int column = 0; column < columns; column++)
