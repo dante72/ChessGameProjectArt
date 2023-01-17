@@ -14,7 +14,7 @@ public class BoardScript : MonoBehaviour
     private const int rows = 8, columns = 8;
     private float scale = 2;
 
-    private ChessBoard _chessBoard;
+    internal ChessBoard _chessBoard;
 
     internal readonly GameObject[,] cells = new GameObject[rows, columns];
     internal readonly List<GameObject> figures = new List<GameObject>();
