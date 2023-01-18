@@ -15,6 +15,7 @@ public class CameraPosition : MonoBehaviour
     void Start()
     {
         transform.position = whitePosition;
+        transform.LookAt(lookAt.transform);
     }
 
     // Update is called once per frame
