@@ -93,9 +93,17 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1324103971359918624}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3862718405620410197
@@ -112,5 +120,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selected: {fileID: 2100000, guid: 615ecaaf4230045489e848eeb2c664c1, type: 2}
   marked: {fileID: 2100000, guid: d27d820beb32a2b4db98055f1188d2c0, type: 2}
-  white: {fileID: 2100000, guid: b2290198fc404d24f8c779978b150c44, type: 2}
-  black: {fileID: 2100000, guid: 057023afac9d48445b45d5a1481496e0, type: 2}
+  white: {fileID: 2100000, guid: 9579c7f32eb78ee42a30022ebf77c996, type: 2}
+  black: {fileID: 2100000, guid: bf74c7a1c71c1ac48989c80f494bf0a8, type: 2}
