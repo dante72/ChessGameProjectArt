@@ -6,6 +6,7 @@ using UnityEngine;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using System;
+using System.Linq;
 
 public class FigureScript : MonoBehaviour
 {
@@ -24,7 +25,8 @@ public class FigureScript : MonoBehaviour
     public GameObject boardObject;
 
     private BoardScript boardScript;
-
+    private static Vector3 whiteEatenFigurePos = new Vector3(-2, -0.5f, 0);
+    private static Vector3 blackEatenFigurePos = new Vector3(16, -0.5f, 14);
 
 
     private bool hasInitialized = false;
@@ -42,7 +44,16 @@ public class FigureScript : MonoBehaviour
             else
             {
                 cellScript = null;
-                transform.position = new Vector3(-2, 0, -2);
+                if (_figure.Color == FigureColor.White)
+                {
+                    transform.position = whiteEatenFigurePos;
+                    whiteEatenFigurePos += new Vector3(0, 0, 2);
+                }
+                else
+                {
+                    transform.position = blackEatenFigurePos;
+                    blackEatenFigurePos -= new Vector3(0, 0, 2);
+                }
             }
         }
     }
