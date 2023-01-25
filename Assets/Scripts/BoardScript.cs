@@ -74,7 +74,7 @@ public class BoardScript : MonoBehaviour
         {
             for(int column = 0; column < columns; column++)
             {
-                var viewCell = Instantiate(cellPrefab, new Vector3(column * scale, 0, (rows - 1 - row) * scale), Quaternion.identity);
+                var viewCell = Instantiate(cellPrefab, new Vector3(column * scale, 0, (rows - 1 - row) * scale), Quaternion.identity, transform);
 
                 var cellModel = _chessBoard.GetCell(row, column);
 
@@ -92,7 +92,7 @@ public class BoardScript : MonoBehaviour
         if (figure == null)
             return null;
 
-        var figureInctance = Instantiate(figureObject, cell.transform.position, Quaternion.identity);
+        var figureInctance = Instantiate(figureObject, cell.transform.position, Quaternion.identity, cell.transform);
 
         figureInctance.GetComponent<FigureScript>().OnInit(figure, cell);
 

@@ -39,7 +39,9 @@ public class FigureScript : MonoBehaviour
             if (cell)
             {
                 cellScript = cell.GetComponent<CellScript>();
-                transform.position = cell.transform.position;
+                //transform.position = cell.transform.position;
+                transform.parent = cell.transform;
+                transform.localPosition = Vector3.zero;
             }
             else
             {
@@ -54,6 +56,7 @@ public class FigureScript : MonoBehaviour
                     transform.position = blackEatenFigurePos;
                     blackEatenFigurePos -= new Vector3(0, 0, 2);
                 }
+                transform.parent = null;
             }
         }
     }
