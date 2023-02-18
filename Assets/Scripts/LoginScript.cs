@@ -1,7 +1,8 @@
 using ChessGameClient.AuthWebAPI;
 using System;
-
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LoginSqript : MonoBehaviour
 {
@@ -9,6 +10,10 @@ public class LoginSqript : MonoBehaviour
 
     public GameObject menuComponent;
     public GameObject loginComponent;
+    public TextMeshProUGUI errorMessage;
+    public TMP_InputField login;
+    public TMP_InputField password;
+
     void Start()
     {
         
@@ -17,7 +22,6 @@ public class LoginSqript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     public async void StartGame()
@@ -28,8 +32,8 @@ public class LoginSqript : MonoBehaviour
         {
             var result = await GameClientV2.Client.authService.Autorization(new AccountRequestModel()
             {
-                Login = "admin",
-                Password = "admin"
+                Login = login.text.ToString(),
+                Password = password.text.ToString()
             });
 
             if (result)
@@ -39,11 +43,22 @@ public class LoginSqript : MonoBehaviour
                 menuComponent.SetActive(true);
             }
             else
-                Debug.Log($"incorrect login or password!");
+            {
+                Debug.Log($"Incorrect login or password! {login.text}, {password.text}");
+                SetErrorMessage("Incorrect login or password!");
+            }
         }
         catch (Exception ex)
         {
             Debug.LogWarning(ex.Message);
+            SetErrorMessage("Error!");
         }
+    }
+
+    private void SetErrorMessage(string message)
+    {
+        //errorMessage.CrossFadeAlpha(1.0f, 0.0f, false);
+        errorMessage.text = message;
+        //errorMessage.CrossFadeAlpha(0.0f, 5f, false);
     }
 }
