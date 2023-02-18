@@ -2,8 +2,10 @@ using ChessGameClient.AuthWebAPI;
 using ChessGameClient.Services;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MenuScript : MonoBehaviour
 {
@@ -12,6 +14,7 @@ public class MenuScript : MonoBehaviour
     public static bool flag = false;
 
     public static bool closeMenu = false;
+    public TextMeshProUGUI errorMessage;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,7 +40,20 @@ public class MenuScript : MonoBehaviour
         if (await GameClientV2.Client.authWebApi.SessionExists())
             await GameClientV2.Client.gameHubService.GetBoard();
         else
-            await GameClientV2.Client.gameHubService.AddOrRemovePlayer(0);
+        {
+            var status = await GameClientV2.Client.authWebApi.AddOrRemovePlayer();
+
+            if (!status)
+            {
+                Debug.Log("Search!");
+                errorMessage.text = "Search!";
+            }
+            else
+            {
+                Debug.Log("Stop search!");
+                errorMessage.text = "";
+            }
+        }
     }
 
     public void StartScene()
