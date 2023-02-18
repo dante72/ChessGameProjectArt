@@ -85,8 +85,17 @@ public class FigureScript : MonoBehaviour
         if (Cell == null)
             return;
 
-        if (Figure.Position.Figure != Figure)
+        var newFig = Figure.Position?.Figure;
+
+        if (newFig != Figure)
         {
+            if (Figure is Pawn p && p.Color == newFig?.Color)
+            {
+                Destroy(figureInstance);
+                OnInit(newFig, Cell);
+                return;
+            }
+
             RemoveFigure();
             return;
         }
@@ -95,6 +104,7 @@ public class FigureScript : MonoBehaviour
             return;
         
         Cell = boardScript.cells[Figure.Position.Row, Figure.Position.Column];
+
     }
 
     internal void OnInit(Figure figure, GameObject cell)
@@ -147,7 +157,7 @@ public class FigureScript : MonoBehaviour
         transform.rotation = figure.Color == FigureColor.White
                         ? Quaternion.identity
                         : Quaternion.Euler(0, 180, 0);
-        GetComponentInChildren<Renderer>().material = figure.Color == FigureColor.White ? white : black;
+        figureInstance.GetComponent<Renderer>().material = figure.Color == FigureColor.White ? white : black;
 
         return figureInstance;
     }
