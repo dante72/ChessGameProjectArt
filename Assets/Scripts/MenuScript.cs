@@ -18,7 +18,7 @@ public class MenuScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        errorMessage.text = string.Empty;
     }
 
     // Update is called once per frame

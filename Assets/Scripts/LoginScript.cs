@@ -16,7 +16,7 @@ public class LoginSqript : MonoBehaviour
 
     void Start()
     {
-        
+        errorMessage.text = string.Empty;
     }
 
     // Update is called once per frame

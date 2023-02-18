@@ -20,6 +20,9 @@ public class GameStatusScript : MonoBehaviour
     void Start()
     {
         boardScript = board.GetComponent<BoardScript>();
+        timer1.text = string.Empty;
+        timer2.text = string.Empty;
+        gameStatus.text = string.Empty;
     }
 
     // Update is called once per frame
