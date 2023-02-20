@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1324103971359918629}
   - component: {fileID: 1324103971359918626}
   - component: {fileID: 1324103971359918627}
-  - component: {fileID: 1324103971359918631}
+  - component: {fileID: 3862718405620410197}
   m_Layer: 0
   m_Name: ChessCell
   m_TagString: Untagged
@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1324103971359918624}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.144, y: 0, z: 2.25}
+  m_LocalPosition: {x: -4.25, y: 0, z: 2.25}
   m_LocalScale: {x: 2, y: 1, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -93,12 +93,20 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1324103971359918624}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1324103971359918631
+--- !u!114 &3862718405620410197
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -107,7 +115,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1324103971359918624}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 648b9ee8ffb5add4681bd7da0f844e4b, type: 3}
+  m_Script: {fileID: 11500000, guid: 4042983615262604583dfe5156141097, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  oldColor: {r: 0, g: 0, b: 0, a: 0}
+  selected: {fileID: 2100000, guid: 615ecaaf4230045489e848eeb2c664c1, type: 2}
+  marked: {fileID: 2100000, guid: d27d820beb32a2b4db98055f1188d2c0, type: 2}
+  white: {fileID: 2100000, guid: 9579c7f32eb78ee42a30022ebf77c996, type: 2}
+  black: {fileID: 2100000, guid: bf74c7a1c71c1ac48989c80f494bf0a8, type: 2}
