@@ -31,7 +31,7 @@ public class GameStatusScript : MonoBehaviour
         if (chessBoard == null || chessBoard.Player == null)
             return;
 
-        gameStatus.text = GetGameStatus(chessBoard.GameStatus);
+        gameStatus.text = chessBoard.GameStatusDescription;
 
         var player1 = chessBoard.Player;
         var player2 = chessBoard.Players.First(p => p != player1);
@@ -41,29 +41,5 @@ public class GameStatusScript : MonoBehaviour
 
         var timer2Text = player2?.Timer.Value;
         timer2.text = $"{timer2Text:hh\\:mm\\:ss}";
-    }
-
-    private string GetGameStatus(GameStatus gameStatus)
-    {
-        switch (gameStatus)
-        {
-            case GameStatus.Normal:
-                return chessBoard.GetCurrentPlayer() == chessBoard.Player.Color ? "Ваш ход" : "Ход соперника";
-
-            case GameStatus.Check:
-                return chessBoard.GetCurrentPlayer() == chessBoard.Player.Color ? "Соперник объявил вам ШАХ!" : "Вы объявили ШАХ сопернику!";
-
-            case GameStatus.Stalemate:
-                return "Пат, Ничья!";
-
-            case GameStatus.Checkmate:
-                return chessBoard.GetCurrentPlayer() == chessBoard.Player.Color ? "Соперник объявил вам МАТ!" : "Вы объявили МАТ сопернику!";
-
-            case GameStatus.TimeIsUp:
-                return chessBoard.GetCurrentPlayer() == chessBoard.Player.Color ? "Ваше время вышло!" : "Время соперника вышло!";
-
-            default:
-                return "Unknown status!";
-        }
     }
 }
