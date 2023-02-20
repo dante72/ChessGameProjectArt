@@ -37,13 +37,23 @@ public class MenuScript : MonoBehaviour
     {
         Debug.Log("Start game");
 
+        if (!GameClientV2.Client.gameHubService.IsConnected)
+        {
+            if (!await GameClientV2.Client.gameHubService.InitConnection())
+            {
+                Debug.Log("No connection!");
+                errorMessage.text = "No connection!";
+                return;
+            }
+        }
+
         if (await GameClientV2.Client.authWebApi.SessionExists())
             await GameClientV2.Client.gameHubService.GetBoard();
         else
         {
             var status = await GameClientV2.Client.authWebApi.AddOrRemovePlayer();
 
-            if (!status)
+            if (status)
             {
                 Debug.Log("Search!");
                 errorMessage.text = "Search!";

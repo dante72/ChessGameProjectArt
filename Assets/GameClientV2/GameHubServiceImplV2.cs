@@ -34,11 +34,7 @@ public class GameHubServiceImplV2 : GameHubServiceImpl
 
     public async override void GameStartAction()
     {
-        //MenuScript.flag = true;
         await GetBoard();
-        //SceneManager.LoadScene(1);
-        //BoardScript.chessBoard = _board;
-        //MenuScript.menuComponent.SetActive(false);
     }
 
     public override void OnReceiveBoardAction()
