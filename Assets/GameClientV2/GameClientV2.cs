@@ -7,19 +7,7 @@ using System;
         {
         }
 
-        private static GameClientV2 client;
-        public new static GameClientV2 Client
-        {
-            get
-            {
-                if (client == null)
-                {
-                    client = new GameClientV2();
-                }
-
-                return client;
-            }
-        }
-
+        readonly private static GameClientV2 client = new GameClientV2();
+        public new static GameClientV2 Client => client;
         public override Type GetGameHubServiceType() => typeof(GameHubServiceImplV2);
     }

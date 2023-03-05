@@ -41,6 +41,8 @@ public class GameHubServiceImplV2 : GameHubServiceImpl
     {
         BoardScript.Mode = 1;
         BoardScript.Reload = true;
+        MenuScript.HasActiveSession= true;
+
         if (_board.Player != null)
         {
             if (_board.Player.Color == FigureColor.White)

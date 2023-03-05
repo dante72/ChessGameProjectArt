@@ -13,6 +13,7 @@ public class LoginSqript : MonoBehaviour
     public TextMeshProUGUI errorMessage;
     public TMP_InputField login;
     public TMP_InputField password;
+    internal static bool close = true;
 
     void Start()
     {
