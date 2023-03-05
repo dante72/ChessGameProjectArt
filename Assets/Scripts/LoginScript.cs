@@ -52,7 +52,7 @@ public class LoginSqript : MonoBehaviour
         catch (Exception ex)
         {
             Debug.LogWarning(ex.Message);
-            SetErrorMessage("Error!");
+            SetErrorMessage(ex.Message);
         }
     }
 
