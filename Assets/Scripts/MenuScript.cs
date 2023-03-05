@@ -9,16 +9,22 @@ using UnityEngine.UI;
 
 public class MenuScript : MonoBehaviour
 {
+    public GameObject loginComponent;
     public GameObject menuComponent;
     private bool visible = true;
     public static bool flag = false;
 
     public static bool closeMenu = false;
+    internal static bool HasActiveSession = false;
     public TextMeshProUGUI errorMessage;
-    // Start is called before the first frame update
+    public Button StartGame;
+    public Button GiveUp;
+    public Button Exit;
+
     void Start()
     {
         errorMessage.text = string.Empty;
+        GiveUp.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -31,6 +37,26 @@ public class MenuScript : MonoBehaviour
             visible = !visible;
             menuComponent.SetActive(visible);
         }
+
+        if (HasActiveSession)
+            IsActiveSession();
+        else
+            IsNotActiveSession();
+    }
+
+
+    internal void IsNotActiveSession()
+    {
+        StartGame.gameObject.SetActive(true);
+        GiveUp.gameObject.SetActive(false);
+        Exit.gameObject.SetActive(true);
+    }
+
+    internal void IsActiveSession()
+    {
+        StartGame.gameObject.SetActive(false);
+        GiveUp.gameObject.SetActive(true);
+        Exit.gameObject.SetActive(false);
     }
 
     public async void NewGame()
@@ -48,7 +74,10 @@ public class MenuScript : MonoBehaviour
         }
 
         if (await GameClientV2.Client.authWebApi.SessionExists())
+        {
             await GameClientV2.Client.gameHubService.GetBoard();
+            IsActiveSession();
+        }
         else
         {
             var status = await GameClientV2.Client.authWebApi.AddOrRemovePlayer();
@@ -64,6 +93,21 @@ public class MenuScript : MonoBehaviour
                 errorMessage.text = "";
             }
         }
+    }
+
+    public async void GameOver()
+    {
+        await GameClientV2.Client.gameHubService.GameOver();
+        HasActiveSession = false;
+    }
+
+    public async void LogOut()
+    {
+        await GameClientV2.Client.authService.LogOut();
+        IsNotActiveSession();
+        loginComponent.SetActive(true);
+        menuComponent.SetActive(false);
+
     }
 
     public void StartScene()
