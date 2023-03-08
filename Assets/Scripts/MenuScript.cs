@@ -90,7 +90,7 @@ public class MenuScript : MonoBehaviour
             else
             {
                 Debug.Log("Stop search!");
-                errorMessage.text = "";
+                errorMessage.text = "Stop search!";
             }
         }
     }

@@ -1113,6 +1113,7 @@ GameObject:
   - component: {fileID: 505932584}
   - component: {fileID: 505932586}
   - component: {fileID: 505932585}
+  - component: {fileID: 505932587}
   m_Layer: 5
   m_Name: ErrorMessage
   m_TagString: Untagged
@@ -1237,6 +1238,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 505932583}
   m_CullTransparentMesh: 1
+--- !u!114 &505932587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 505932583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 134ee8b0c1883e14b9cd08cdc13599b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &530886075
 GameObject:
   m_ObjectHideFlags: 0
@@ -1382,7 +1395,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 530886075}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 323085314d34ed147af2e9ea7ee7a0bc, type: 3}
+  m_Script: {fileID: 11500000, guid: 134ee8b0c1883e14b9cd08cdc13599b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &565892004
