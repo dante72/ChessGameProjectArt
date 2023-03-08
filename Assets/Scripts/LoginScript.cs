@@ -58,8 +58,8 @@ public class LoginSqript : MonoBehaviour
 
     private void SetErrorMessage(string message)
     {
-        //errorMessage.CrossFadeAlpha(1.0f, 0.0f, false);
         errorMessage.text = message;
-        //errorMessage.CrossFadeAlpha(0.0f, 5f, false);
     }
+
+    public void Exit() => Application.Quit();
 }
